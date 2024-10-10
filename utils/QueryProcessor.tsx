@@ -13,18 +13,18 @@ export default function QueryProcessor(query: string): string {
     return ("sherry");
   }
 
-  if (query.toLowerCase().includes("plus")) {
-    // Extract the numbers using regex
-    const numbers = query.match(/\d+/g);
-    if (numbers && numbers.length === 2) {
-      // Parse the numbers and add them
-      const num1 = parseInt(numbers[0], 10);
-      const num2 = parseInt(numbers[1], 10);
-      return (num1 + num2).toString();
-    } else {
-      return "Invalid query. Please provide two numbers to add.";
-    }}
-    
+//   if (query.toLowerCase().includes("plus")) {
+//     // Extract the numbers using regex
+//     const numbers = query.match(/\d+/g);
+//     if (numbers && numbers.length === 2) {
+//       // Parse the numbers and add them
+//       const num1 = parseInt(numbers[0], 10);
+//       const num2 = parseInt(numbers[1], 10);
+//       return (num1 + num2).toString();
+//     } else {
+//       return "Invalid query. Please provide two numbers to add.";
+//     }}
+
     const match1 = query.match(/What is (.+)/);
     if (match1) {
         const expression = match1[1]
