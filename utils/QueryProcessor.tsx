@@ -12,6 +12,7 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("name")) {
     return ("sherry");
   }
+
   if (query.toLowerCase().includes("plus")) {
     // Extract the numbers using regex
     const numbers = query.match(/\d+/g);
@@ -24,12 +25,23 @@ export default function QueryProcessor(query: string): string {
       return "Invalid query. Please provide two numbers to add.";
     }}
     
-//     const addMatch = query.match(/What is (\d+) plus (\d+)/);
-//     if (addMatch) {
-//         const x: number = parseInt(addMatch[1]);
-//         const y: number = parseInt(addMatch[2]);
-//         return (x+y).toString();
-//   }
+    const match1 = query.match(/What is (.+)/);
+    if (match1) {
+        const expression = match1[1]
+            .replace(/plus/g, '+')
+            .replace(/minus/g, '-')
+            .replace(/multiplied by/g, '*')
+            .replace(/divided by/g, '/');
+        
+        try {
+            // Use the `eval` function to compute the result safely
+            const result = eval(expression);
+            console.log(result.toString());
+        } catch (error) {
+            console.log("Invalid expression.");
+        }
+    }
+
     const match = query.match(/What is (\d+)\s*(plus|minus|multiplied by|divided by)\s*(\d+)/);
         if (match) {
             const x = parseInt(match[1], 10);
@@ -49,6 +61,7 @@ export default function QueryProcessor(query: string): string {
                     return "Invalid operation.";
             }
         }
+
 
   return "";
 }
