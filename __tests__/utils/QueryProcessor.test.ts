@@ -22,8 +22,16 @@ describe("QueryProcessor", () => {
         const response: string = QueryProcessor(query);
         expect(response).toBe(("szhuge"));
     });
-    test('should add numbers', () => {
+    test("should return name", () => {
+        const query = "name";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe(("sherry"));
+    });
+    test('should operate numbers', () => {
         expect(QueryProcessor("What is 5 plus 52?")).toEqual("57");
         expect(QueryProcessor("What is 12 plus 1?")).toEqual("13");
+        expect(QueryProcessor("What is 10 minus 1?")).toEqual("9");
+        expect(QueryProcessor("What is 10 multiplied by 2?")).toEqual("20");
+        expect(QueryProcessor("What is 100 divided by 2?")).toEqual("50");
     });
 });

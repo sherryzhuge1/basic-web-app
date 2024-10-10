@@ -24,11 +24,31 @@ export default function QueryProcessor(query: string): string {
       return "Invalid query. Please provide two numbers to add.";
     }}
     
-    const addMatch = query.match(/What is (\d+) plus (\d+)/);
-    if (addMatch) {
-        const x: number = parseInt(addMatch[1]);
-        const y: number = parseInt(addMatch[2]);
-        return (x+y).toString();
-  }
+//     const addMatch = query.match(/What is (\d+) plus (\d+)/);
+//     if (addMatch) {
+//         const x: number = parseInt(addMatch[1]);
+//         const y: number = parseInt(addMatch[2]);
+//         return (x+y).toString();
+//   }
+    const match = query.match(/What is (\d+)\s*(plus|minus|multiplied by|divided by)\s*(\d+)/);
+        if (match) {
+            const x = parseInt(match[1], 10);
+            const operator = match[2];
+            const y = parseInt(match[3], 10);
+
+            switch (operator) {
+                case "plus":
+                    return (x + y).toString();
+                case "minus":
+                    return (x - y).toString();
+                case "multiplied by":
+                    return (x * y).toString();
+                case "divided by":
+                    return y !== 0 ? (x / y).toString() : "Error: Division by zero";
+                default:
+                    return "Invalid operation.";
+            }
+        }
+
   return "";
 }
